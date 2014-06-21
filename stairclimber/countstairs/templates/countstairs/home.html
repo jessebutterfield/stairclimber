@@ -8,5 +8,5 @@
 {% endfor %}
 <form action="oneTime/" method="post">
 {% csrf_token %}
- <input type="submit" value="Add" /> <input type="number" name="steps" min="{{-dailyStairs.total}}" step="1" value="0">
+ <input type="submit" value="Add" /> <input type="number" name="steps" min="-{{dailyStairs.total}}" step="1" value="0">
 </form>
