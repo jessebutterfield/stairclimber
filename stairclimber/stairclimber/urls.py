@@ -12,5 +12,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^oneTime/', 'countstairs.views.oneTimeAdd'),
     url(r'^addPreset/(?P<id>\d+)', 'countstairs.views.addPreset'),
+    url(r'^newPreset/(?P<id>\d+)', 'countstairs.views.newPreset'),
+    url(r'^editPreset/', 'countstairs.views.editCustomSettings'),
     url(r'^$', 'countstairs.views.home'),
 )

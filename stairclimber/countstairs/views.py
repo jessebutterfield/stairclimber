@@ -18,7 +18,7 @@ def home(request):
 	day = date.today()
 	dailyStairs,_ = DailyStairs.objects.get_or_create(day=day, climber=user)
 	upDown = user.userpreferences.upDown
-	customStairs = CustomStairCount.objects.filter(user=user).order_by('count')
+	customStairs = CustomStairCount.objects.filter(user=user).order_by('-count')
 	return render_to_response('countstairs/home.html', 
                               {'dailyStairs':dailyStairs,'user':user,'upDown':upDown, 'customStairCounts':customStairs},
                               context_instance=RequestContext(request))
@@ -61,6 +61,30 @@ def addStairs(request, direction, numStairs):
 		dailyStars.down += numStairs
 	dailyStairs.save()
 	return HttpResponseRedirect(reverse('countstairs.views.home'))
+
+@login_required(login_url='/accounts/login/')
+def editCustomSettings(request):
+	user = request.user
+	customStairs = CustomStairCount.objects.filter(user=user).order_by('-count')
+	return render_to_response('countstairs/editCustom.html', 
+                              {'user':user, 'customStairCounts':customStairs},
+                              context_instance=RequestContext(request))
+
+@login_required(login_url='/accounts/login/')
+def newPreset(request, id):
+	user = request.user
+	steps = int(request.POST["steps"])
+	name = request.POST["label"]
+	if(int(id) == 0):
+		stairCount = CustomStairCount.objects.create(user=user, steps=steps, name=name)
+	else:
+		stairCount = CustomStairCount.objects.get(id=id)
+		stairCount.name = name
+		stairCount.steps = steps
+	stairCount.save()
+	return HttpResponseRedirect(reverse('countstairs.views.editCustomSettings'))
+
+
 
 
 

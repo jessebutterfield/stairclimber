@@ -1,12 +1,13 @@
 <h2> Hey {{user.username}}</h2>
 <p> You've climbed {{dailyStairs.total}} stairs today{% if upDown %} ({{dailyStairs.up}} up and {{dailyStairs.down}} down){% endif %}. </p>
 {% for preset in customStairCounts %}
-<form action="addPreset/{{preset.id}}" method="post">
+<form action="/addPreset/{{preset.id}}" method="post">
 {% csrf_token %}
  <input type="submit" value="Add" /> <span>{{preset.name}} - {{preset.steps}}</span>
 </form>
 {% endfor %}
-<form action="oneTime/" method="post">
+<form action="/oneTime/" method="post">
 {% csrf_token %}
  <input type="submit" value="Add" /> <input type="number" name="steps" min="-{{dailyStairs.total}}" step="1" value="0">
 </form>
+<a href="/editPreset"> Edit preset stair settings </a>

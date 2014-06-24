@@ -1,0 +1,13 @@
+<form action="/newPreset/0" method="post">
+{% csrf_token %}
+ <input type="text" name="label" > <input type="number" name="steps" min="0" step="1" value="0">
+ <input type="submit" value="Add" />
+</form>
+{% for preset in customStairCounts %}
+<form action="/newPreset/{{preset.id}}" method="post">
+{% csrf_token %}
+ <input type="text" name="label" value="{{preset.name}}"> <input type="number" name="steps" min="0" step="1" value="{{preset.steps}}">
+ <input type="submit" value="Update" />
+</form>
+{% endfor %}
+<a href="/"> Back to home </a>
