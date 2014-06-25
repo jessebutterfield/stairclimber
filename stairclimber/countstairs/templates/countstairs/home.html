@@ -1,3 +1,7 @@
+<head>
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="viewport" content="width=device-width,height=device-height, user-scalable=no" />
+</head>
 <h2> Hey {{user.username}}</h2>
 <p> You've climbed {{dailyStairs.total}} stairs today{% if upDown %} ({{dailyStairs.up}} up and {{dailyStairs.down}} down){% endif %}. </p>
 {% for preset in customStairCounts %}
