@@ -9,6 +9,8 @@ class DailyStairs(models.Model):
    	down = models.IntegerField(default=0)
    	total = models.IntegerField(default=0)
    	climber = models.ForeignKey(User)
+	def __unicode__(self):  # Python 3: def __str__(self):
+		return self.climber.username + ' - ' + str(self.total)
 
 class UserPreferences(models.Model):
 	user = models.OneToOneField(User)
